@@ -2,41 +2,36 @@
   "name": "react-template",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject"
+    "start": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview",
+    "test": "vite test"
   },
   "dependencies": {
-    "@types/node": "12.7.12",
-    "@types/react": "16.9.5",
-    "@types/react-dom": "16.9.1",
+    "@types/node": "^20.12.3",
+    "@types/react": "^18.2.74",
+    "@types/react-dom": "^18.2.23",
     "axios": "^1.6.8",
-    "bootstrap": "^4.3.1",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2",
-    "react-fontawesome": "^1.6.1",
-    "reactjs-popup": "^1.5.0",
-    "typescript": "^3.7.0-beta"
+    "bootstrap": "^5.3.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-fontawesome": "^1.7.1",
+    "reactjs-popup": "^2.0.6",
+    "typescript": "^5.4.3"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@fortawesome/fontawesome-free": "^5.11.2",
-    "react-scripts": "^5.0.1"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "@babel/plugin-transform-private-property-in-object": "^7.24.1",
+    "@fortawesome/fontawesome-free": "^6.5.2",
+    "@types/node": "^20.12.4",
+    "@types/react-dom": "^18.2.24",
+    "typescript": "^5.4.4",
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.2.7",
+    "vite-plugin-svgr": "^4.2.0"
   }
 }
