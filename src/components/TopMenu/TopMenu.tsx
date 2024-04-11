@@ -2,7 +2,7 @@ import "./TopMenu.css";
 
 import { FC } from "react";
 
-import { useModalContext } from "@/common/components/ModalContext";
+import { useModalContext } from "@/components/Modal/ModalContext";
 
 import TopMenuAccount from "./TopMenuAccount";
 

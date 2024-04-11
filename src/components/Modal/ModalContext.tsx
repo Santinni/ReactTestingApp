@@ -6,9 +6,9 @@ import {
   useContext,
   useMemo,
   useState,
-} from "react";
+} from 'react';
 
-import Modal from "./Modal";
+import Modal from './Modal';
 
 type ModalContextProps = Readonly<{
   setModal: (modal: ReactNode) => void;
@@ -36,7 +36,7 @@ const ModalContextProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
 
   return (
     <ModalContext.Provider value={value}>
-      <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+      <Modal open={isOpen} onClose={() => setIsOpen(false)} title="Modal title">
         {selectedModal}
       </Modal>
       {children}

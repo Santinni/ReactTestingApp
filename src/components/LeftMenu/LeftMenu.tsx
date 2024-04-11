@@ -1,5 +1,7 @@
 import { FC, useState } from "react";
 
+import { Link } from "@tanstack/react-router";
+
 const LeftMenu: FC = () => {
   const [leftMenuVisibility, setLeftMenuVisibility] = useState(false);
 
@@ -28,9 +30,9 @@ const LeftMenu: FC = () => {
         className={`navbar-nav bg-gradient-primary-green sidebar sidebar-dark accordion ${getCollapseClass()}`}
         id="collapseMenu"
       >
-        <a
+        <Link
           className="sidebar-brand d-flex align-items-center justify-content-center"
-          href="index.html"
+          to="/"
         >
           <div className="sidebar-brand-icon icon-green rotate-n-15">
             <i className="fas fa-bolt"></i>
@@ -38,15 +40,15 @@ const LeftMenu: FC = () => {
           <div className="sidebar-brand-text mx-3">
             REACT <sup>Admin</sup>
           </div>
-        </a>
+        </Link>
 
         <hr className="sidebar-divider my-0" />
 
         <li className="nav-item active">
-          <a className="nav-link" href="index.html">
+          <Link className="nav-link" to="/">
             <i className="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
-          </a>
+          </Link>
         </li>
 
         <hr className="sidebar-divider" />
@@ -54,10 +56,10 @@ const LeftMenu: FC = () => {
         <div className="sidebar-heading">Menu</div>
 
         <li className="nav-item">
-          <a className="nav-link" href="index.html">
+          <Link className="nav-link" to="/characters">
             <i className="fas fa-fw fa-user"></i>
             <span>Characters</span>
-          </a>
+          </Link>
         </li>
 
         <hr className="sidebar-divider" />

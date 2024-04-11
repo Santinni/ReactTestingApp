@@ -8,12 +8,14 @@ import {
 type ModalProps = {
   open: boolean;
   onClose: () => void;
+  title: string;
 };
 
 const Modal: FC<PropsWithChildren<ModalProps>> = ({
   open,
   onClose,
   children,
+  title,
 }) => {
   return (
     <>
@@ -29,7 +31,7 @@ const Modal: FC<PropsWithChildren<ModalProps>> = ({
         <div className="custom-modal-dialog" role="document">
           <div className="custom-modal-content">
             <div className="modal-header">
-              <h5 className="modal-title">Modal title</h5>
+              <h5 className="modal-title">{title}</h5>
               <button
                 type="button"
                 className="close"

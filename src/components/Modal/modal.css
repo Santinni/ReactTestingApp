@@ -6,14 +6,8 @@
     left: 0;
     background-color: black;
 
-    &.fade {
-        opacity: 0;
-    }
-
-    &.show {
-        opacity: .5;
-        z-index: 1;
-    }
+    &.fade { opacity: 0; }
+    &.show { opacity: .5; z-index: 1; }
 }
 
 .custom-modal {

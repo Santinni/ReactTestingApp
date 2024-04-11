@@ -37,6 +37,8 @@
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/indent": "off",
     "react/require-default-props": "off",
-    "prefer-const": "off"
+    "prefer-const": "off",
+    "import/order": "off",
+    "import/prefer-default-export": "off"
   }
 }
