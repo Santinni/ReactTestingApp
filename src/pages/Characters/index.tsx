@@ -2,13 +2,22 @@ import "./Characters.css";
 
 import { FC, useState } from "react";
 
-import TextInput from "@/common/components/TextInput";
-import TopCard from "@/common/components/TopCard";
+import TextInput from "@/components/TextInput";
+import TopCard from "@/components/TopCard";
+import useGetCharacters from "@/hooks/useGetCharacters";
+import useGetEpisodes from "@/hooks/useGetEpisodes";
+import useGetLocations from "@/hooks/useGetLocations";
+
+import CharactersTable from "./components/CharactersTable";
 
 const Characters: FC = () => {
   const [filters, setFilters] = useState({
     search: "",
   });
+
+  const { data: charactersData } = useGetCharacters();
+  const { data: locationsData } = useGetLocations();
+  const { data: episodesData } = useGetEpisodes();
 
   return (
     <>
@@ -16,12 +25,22 @@ const Characters: FC = () => {
       <div className="row">
         <TopCard
           title="CHARACTER COUNT"
-          text="99"
+          text={charactersData?.data.info.count.toString()}
           icon="user"
           class="primary"
         />
-        <TopCard title="LOCATION COUNT" text="133" icon="map" class="danger" />
-        <TopCard title="EPISODE COUNT" text="231" icon="film" class="success" />
+        <TopCard
+          title="LOCATION COUNT"
+          text={locationsData?.data.info.count.toString()}
+          icon="map"
+          class="danger"
+        />
+        <TopCard
+          title="EPISODE COUNT"
+          text={episodesData?.data.info.count.toString()}
+          icon="film"
+          class="success"
+        />
       </div>
 
       <div className="row">
@@ -48,7 +67,9 @@ const Characters: FC = () => {
                 className="d-flex align-items-center search-gap"
               />
             </div>
-            <div className="card-body"></div>
+            <div className="card-body">
+              <CharactersTable />
+            </div>
           </div>
         </div>
       </div>

@@ -1,20 +1,31 @@
 import "./App.css";
 import "./styles/sb-admin-2.css";
 
-import { FC } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { createRouter, RouterProvider } from "@tanstack/react-router";
 
-import Admin from "@/components/Admin/Admin";
+import { ModalContextProvider } from "./components/Modal/ModalContext";
+import { routeTree } from "./routeTree.gen";
 
-import { ModalContextProvider } from "./common/components/ModalContext";
+const router = createRouter({ routeTree });
 
-const App: FC = () => {
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof router;
+  }
+}
+
+function App() {
+  const queryClient = new QueryClient();
   return (
     <div className="App" id="wrapper">
-      <ModalContextProvider>
-        <Admin />
-      </ModalContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <ModalContextProvider>
+          <RouterProvider router={router} />
+        </ModalContextProvider>
+      </QueryClientProvider>
     </div>
   );
-};
+}
 
 export default App;

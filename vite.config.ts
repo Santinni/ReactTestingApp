@@ -1,7 +1,9 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import path from "path";
 import { defineConfig } from "vite";
 import svgrPlugin from "vite-plugin-svgr";
 
+import { TanStackRouterVite } from "@tanstack/router-vite-plugin";
 import reactRefresh from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
@@ -24,5 +26,6 @@ export default defineConfig({
         // ...svgr options (https://react-svgr.com/docs/options/)
       },
     }),
+    TanStackRouterVite(),
   ],
 });
