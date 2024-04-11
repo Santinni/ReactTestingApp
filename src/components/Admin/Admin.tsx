@@ -1,12 +1,12 @@
-import React, { Fragment } from "react";
+import { FC } from "react";
+
+import Characters from "../Characters/Characters";
 import LeftMenu from "../LeftMenu/LeftMenu";
 import TopMenu from "../TopMenu/TopMenu";
-import Characters from "../Characters/Characters";
 
-const Admin: React.FC = () => {
-
+const Admin: FC = () => {
   return (
-    <Fragment>
+    <>
       <LeftMenu />
       <div id="content-wrapper" className="d-flex flex-column">
         <div id="content">
@@ -16,7 +16,7 @@ const Admin: React.FC = () => {
           </div>
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 
