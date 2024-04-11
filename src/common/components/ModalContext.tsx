@@ -1,5 +1,14 @@
-import React, {createContext, FC, PropsWithChildren, ReactNode, useContext, useState} from 'react';
-import {Modal} from "./Modal";
+import {
+  createContext,
+  FC,
+  PropsWithChildren,
+  ReactNode,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
+
+import Modal from "./Modal";
 
 type ModalContextProps = Readonly<{
   setModal: (modal: ReactNode) => void;
@@ -15,16 +24,18 @@ const ModalContext = createContext<ModalContextProps>({
 
 const ModalContextProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
   const [selectedModal, setSelectedModal] = useState<ReactNode>(null);
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const value = useMemo(
+    () => ({
+      setModal: (modal: ReactNode) => setSelectedModal(modal),
+      openModal: () => setIsOpen(true),
+      closeModal: () => setIsOpen(false),
+    }),
+    []
+  );
 
   return (
-    <ModalContext.Provider
-      value={{
-        setModal: (modal) => setSelectedModal(modal),
-        openModal: () => setIsOpen(true),
-        closeModal: () => setIsOpen(false),
-      }}
-    >
+    <ModalContext.Provider value={value}>
       <Modal open={isOpen} onClose={() => setIsOpen(false)}>
         {selectedModal}
       </Modal>

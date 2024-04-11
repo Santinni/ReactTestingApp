@@ -1,67 +1,98 @@
-import React, {useState, ChangeEvent, useEffect} from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 type TextInputProps = {
-  required: boolean,
-  onChange: ({ value, error, touched, field }: { value: string, error: string, touched: boolean, field: string }) => void,
-  id: string,
-  label: string,
-  placeholder: string,
-  value: string,
-  type?: string,
-  maxLength: number,
-  inputClass?: string,
-  field: string
-  className?: string
+  required: boolean;
+  onChange: ({
+    value,
+    error,
+    touched,
+    field,
+  }: {
+    value: string;
+    error: string;
+    touched: boolean;
+    field: string;
+  }) => void;
+  id: string;
+  label: string;
+  placeholder: string;
+  value: string;
+  type?: string;
+  maxLength: number;
+  inputClass?: string;
+  field: string;
+  className?: string;
 };
 
 function TextInput(props: TextInputProps): JSX.Element {
+  const {
+    onChange,
+    field,
+    maxLength,
+    required,
+    className,
+    id,
+    label,
+    inputClass,
+    type,
+    placeholder,
+    value,
+  } = props;
+
   const [touched, setTouch] = useState(false);
   const [error, setError] = useState("");
   const [htmlClass, setHtmlClass] = useState("");
-  const [value, setValue] = useState("");
-
+  const [inputValue, setInputValue] = useState(value);
 
   function onValueChanged(event: ChangeEvent<HTMLInputElement>): void {
-    let [error, validClass, elementValue] = ["", "", event.target.value];
+    let [validationError, validClass, elementValue] = [
+      "",
+      "",
+      event.target.value,
+    ];
 
-    [error, validClass] = (!elementValue && props.required) ?
-      ["Value cannot be empty", "is-invalid"] : ["", "is-valid"];
+    [validationError, validClass] =
+      !elementValue && required
+        ? ["Value cannot be empty", "is-invalid"]
+        : ["", "is-valid"];
 
-    if (!error) {
-      [error, validClass] = (props.maxLength && elementValue && elementValue.length > (props.maxLength)) ?
-        [`Value can't have more than ${props.maxLength} characters`, "is-invalid"] : ["", "is-valid"];
+    if (!validationError) {
+      [validationError, validClass] =
+        maxLength && elementValue && elementValue.length > maxLength
+          ? [`Value can't have more than ${maxLength} characters`, "is-invalid"]
+          : ["", "is-valid"];
     }
 
     setTouch(true);
-    setError(error);
+    setError(validationError);
     setHtmlClass(validClass);
-    setValue(elementValue);
+    setInputValue(elementValue);
   }
 
-
   useEffect(() => {
-    const isValid = value !== '';
+    const isValid = inputValue !== "";
     if (touched && isValid) {
-      props.onChange({ value: value, error: error, touched: touched, field: props.field });
+      onChange({
+        value: inputValue,
+        error,
+        touched,
+        field,
+      });
     }
-  }, [value, props.value, props.onChange, touched]);
-
+  }, [inputValue, touched, onChange, field, error]);
 
   return (
-    <div className={props.className}>
-      <label htmlFor={props.id.toString()}>{props.label}</label>
+    <div className={className}>
+      <label htmlFor={id.toString()}>{label}</label>
       <input
-        value={value}
-        type={props.type}
+        value={inputValue}
+        type={type}
         onChange={onValueChanged}
-        className={`form-control ${props.inputClass} ${htmlClass}`}
-        id={`id_${props.label}`}
-        placeholder={props.placeholder} />
-      {error ?
-        <div className="invalid-feedback">
-          {error}
-        </div> : null
-      }
+        className={`form-control ${inputClass} ${htmlClass}`}
+        id={`id_${label}`}
+        placeholder={placeholder}
+      />
+      {error ? <div className="invalid-feedback">{error}</div> : null}
     </div>
   );
 }
